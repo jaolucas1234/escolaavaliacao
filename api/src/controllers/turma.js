@@ -14,7 +14,7 @@ async function create(req, res) {
         })
         res.status(201).json(turma)
     } catch (error) {
-        console.error('Error creating meditation data:', error)
+        console.error('Error creating turma data:', error)
         res.status(500).json({ error: 'Internal Server Error' })
     }
 }
@@ -23,17 +23,20 @@ async function read(req, res) {
     const { id } = req.params
 
     try {
-        const turma = await prisma.turma.findMany({
-
+        const turmas = await prisma.turma.findMany({
+            where: { 
+                professorId: parseInt(id)
+            }
         })
 
-        if (!turma) {
-            return res.status(404).json({ error: 'Meditation data not found' })
+        // findMany sempre retorna um array, então verificamos se está vazio
+        if (turmas.length === 0) {
+            return res.status(404).json({ error: 'Nenhuma turma encontrada para este professor' })
         }
 
-        res.status(200).json(turma)
+        res.status(200).json(turmas)
     } catch (error) {
-        console.error('Error reading meditation data:', error)
+        console.error('Error reading turma data:', error)
         res.status(500).json({ error: 'Internal Server Error' })
     }
 }
@@ -49,7 +52,7 @@ async function remove(req, res) {
 
         res.status(204).json(turma)
     } catch (error) {
-        console.error('Error deleting meditation data:', error)
+        console.error('Error deleting turma data:', error)
         res.status(500).json({ error: 'Internal Server Error' })
     }
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal do Professor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1 id="nomeProfessor">Carregando...</h1>
+        <a href="../dashboardP/index.html" class="sair-btn">Sair</a>
+    </header>
+    
+    <main class="main">
+        <nav class="sidebar">
+            <button class="cadastrar-btn">Cadastrar atividade</button>
+        </nav>
+        
+        <section class="content">
+            <h2 id="serieTurma">Turma: Carregando...</h2>
+            <div class="tabela-container">
+                <table class="tabela-turmas">
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Nome</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaAtividades">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <h3>Cadastrar Nova Atividade</h3>
+            <input type="text" id="descricaoAtividade" placeholder="Nome da Atividade">
+            <div class="modal-buttons">
+                <button class="cancelar-btn" id="cancelarBtn">Cancelar</button>
+                <button class="cadastrar-modal-btn" id="cadastrarModalBtn">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

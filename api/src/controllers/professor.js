@@ -15,7 +15,7 @@ async function create(req, res) {
         })
         res.status(201).json(professor)
     } catch (error) {
-        console.error('Error creating meditation data:', error)
+        console.error('Error creating professor data:', error)
         res.status(500).json({ error: 'Internal Server Error' })
     }
 }
@@ -29,19 +29,38 @@ async function read(req, res) {
         })
 
         if (!professor) {
-            return res.status(404).json({ error: 'Meditation data not found' })
+            return res.status(404).json({ error: 'professor data not found' })
         }
 
         res.status(200).json(professor)
     } catch (error) {
-        console.error('Error reading meditation data:', error)
+        console.error('Error reading professor data:', error)
         res.status(500).json({ error: 'Internal Server Error' })
     }
 }
+
+async function login(req, res) {
+    const { email, senha } = req.body;
+    try {
+        const professor = await prisma.professor.findFirst({
+            where: {
+                email,
+                senha
+            }
+
+        })
+        res.status(201).json(professor)    
+    } catch (error) {
+        console.error('Error login data:', error)
+        res.status(500).json({ error: 'Internal Server Error' })
+    }
+}
+        
 
 
 
 module.exports = {
     create,
-    read
+    read,
+    login
 }

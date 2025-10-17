@@ -1,0 +1,54 @@
+/* Estilo global */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container do login */
+.login {
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    width: 300px;
+    text-align: center;
+}
+
+/* Título */
+.login h1 {
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Inputs - somente as caixas puxadas para esquerda */
+.inputs input {
+    width: calc(100% + 10px);
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: -18px; /* Puxa somente os inputs para esquerda */
+}
+
+
+.buton button {
+    width: 100%;
+    padding: 12px;
+    background-color: #1e90ff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.buton button:hover {
+    background-color: #1c86ee;
+}

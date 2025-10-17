@@ -8,11 +8,13 @@ const atividadeController = require('./controllers/atividade')
 routes.post('/professores', professorController.create)
 routes.get('/professores', professorController.read)
 
+routes.post('/login', professorController.login)
+
 routes.post('/turmas', turmaController.create)
-routes.get('/turmas', turmaController.read)
+routes.get('/turmas/:id', turmaController.read)
 routes.get('turmas/:id', turmaController.remove)
 
 routes.post('/atividades', atividadeController.create)
-routes.get('/atividades', atividadeController.read)
+routes.get('/atividades/:id', atividadeController.read)
 
 module.exports = routes
