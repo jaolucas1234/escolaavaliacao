@@ -12,7 +12,7 @@ routes.post('/login', professorController.login)
 
 routes.post('/turmas', turmaController.create)
 routes.get('/turmas/:id', turmaController.read)
-routes.get('turmas/:id', turmaController.remove)
+routes.delete('/turmas/:id', turmaController.remove)
 
 routes.post('/atividades', atividadeController.create)
 routes.get('/atividades/:id', atividadeController.read)

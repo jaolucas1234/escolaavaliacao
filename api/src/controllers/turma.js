@@ -20,30 +20,36 @@ async function create(req, res) {
 }
 
 async function read(req, res) {
-    const { id } = req.params
+    const { id } = req.params;
 
     try {
         const turmas = await prisma.turma.findMany({
             where: { 
                 professorId: parseInt(id)
-            }
-        })
+            },
+            include: {
+                atividades: true, 
+            },
+        });
 
-        // findMany sempre retorna um array, então verificamos se está vazio
         if (turmas.length === 0) {
-            return res.status(404).json({ error: 'Nenhuma turma encontrada para este professor' })
+            return res.status(404).json({ error: 'Nenhuma turma encontrada para este professor' });
         }
 
-        res.status(200).json(turmas)
+        res.status(200).json(turmas);
     } catch (error) {
-        console.error('Error reading turma data:', error)
-        res.status(500).json({ error: 'Internal Server Error' })
+        console.error('Error reading turma data:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 }
 
 
+
 async function remove(req, res) {
     const { id } = req.params
+    const idNum = parseInt(id);
+
+    console.log('Tentando deletar turma com id:', idNum);
 
     try {
         const turma = await prisma.turma.delete({

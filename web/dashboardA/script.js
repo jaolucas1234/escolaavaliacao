@@ -57,19 +57,14 @@ function preencherTabelaAtividades(atividades) {
         linha.innerHTML = `
             <td>${index + 1}</td>
             <td>${atividade.descricao}</td>
-            <td class="acoes">
-                <button class="excluir-btn" data-id="${atividade.id}">Excluir</button>
-                <button class="visualizar-btn" data-id="${atividade.id}">Visualizar</button>
-            </td>
         `;
         tabelaAtividadesElement.appendChild(linha);
     });
 }
 
 function fazerLogout() {
-    localStorage.removeItem('professorLogado');
     localStorage.removeItem('turmaSelecionada');
-    window.location.href = '../login/index.html';
+    window.location.href = '../dashboardP/index.html';
 }
 
 function abrirModal() {
@@ -87,7 +82,7 @@ function cadastrarAtividade() {
     
     if (!professor || !turma) return;
     
-    const descricaoAtividade = document.getElementById('descricaoAtividade').value;
+    const descricaoAtividade = document.getElementById('descricaoAtividade').value.trim();
     
     if (descricaoAtividade) {
         fetch('http://localhost:3001/atividades', {
@@ -97,7 +92,7 @@ function cadastrarAtividade() {
             },
             body: JSON.stringify({
                 descricao: descricaoAtividade,
-                turmaId: Number(turma.id)
+                turmaId: turma.id
             })
         })
         .then(response => {
@@ -129,36 +124,5 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.sair-btn').addEventListener('click', function(e) {
         e.preventDefault();
         fazerLogout();
-    });
-    
-    document.getElementById('tabelaAtividades').addEventListener('click', function(e) {
-        const professor = verificarLogin();
-        const turma = obterTurmaSelecionada();
-        
-        if (!professor || !turma) return;
-        
-        if (e.target.classList.contains('excluir-btn')) {
-            const atividadeId = e.target.getAttribute('data-id');
-            if (confirm('Tem certeza que deseja excluir esta atividade?')) {
-                fetch(`http://localhost:3001/atividades/${atividadeId}`, {
-                    method: 'DELETE'
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao excluir atividade');
-                    }
-                    alert('Atividade excluída com sucesso!');
-                    buscarAtividadesTurma(turma.id);
-                })
-                .catch(error => {
-                    alert('Erro ao excluir atividade: ' + error.message);
-                });
-            }
-        }
-        
-        if (e.target.classList.contains('visualizar-btn')) {
-            const atividadeId = e.target.getAttribute('data-id');
-            window.location.href = `../visualizar-atividade/index.html?atividadeId=${atividadeId}`;
-        }
     });
 });

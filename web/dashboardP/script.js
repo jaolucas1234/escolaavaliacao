@@ -56,12 +56,12 @@ function preencherTabelaTurmas(turmas) {
         const excluirBtn = document.createElement('button');
         excluirBtn.className = 'excluir-btn';
         excluirBtn.textContent = 'Excluir';
-        excluirBtn.setAttribute('data-id', turma.id);
+        excluirBtn.setAttribute('data-id', turma.id_turma);
         
         const visualizarBtn = document.createElement('button');
         visualizarBtn.className = 'visualizar-btn';
         visualizarBtn.textContent = 'Visualizar';
-        visualizarBtn.setAttribute('data-id', turma.id);
+        visualizarBtn.setAttribute('data-id', turma.id_turma);
         visualizarBtn.setAttribute('data-nome', turma.serie);
         
         tdAcoes.appendChild(excluirBtn);
